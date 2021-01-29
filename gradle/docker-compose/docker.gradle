@@ -1,0 +1,10 @@
+apply plugin: 'docker-compose'
+
+dockerCompose {
+    useComposeFiles = [
+            "${rootProject.projectDir}/gradle/docker-compose/docker-compose.yml"
+    ]
+}
+
+// hooks 'dependsOn composeUp' and 'finalizedBy composeDown', and exposes environment variables and system properties (if possible)
+dockerCompose.isRequiredBy(bootRun)

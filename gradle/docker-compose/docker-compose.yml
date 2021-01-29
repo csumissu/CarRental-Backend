@@ -1,0 +1,17 @@
+version: "3"
+services:
+  database:
+    container_name: car-rental-mysql
+    restart: always
+    command:
+      --lower_case_table_names=1
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
+      --explicit_defaults_for_timestamp=true
+    image: mysql:8.0
+    environment:
+      TZ: UTC
+      MYSQL_DATABASE: car-rental
+      MYSQL_ROOT_PASSWORD: bc123
+    ports:
+      - 13306:3306
