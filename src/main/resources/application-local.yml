@@ -3,6 +3,10 @@ spring:
     url: jdbc:mysql://localhost:13306/car-rental
     username: root
     password: bc123
+  jpa:
+    generate-ddl: true
+  flyway:
+    enabled: false
 
 management:
   endpoints:

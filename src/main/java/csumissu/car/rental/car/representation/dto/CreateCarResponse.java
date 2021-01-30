@@ -1,0 +1,14 @@
+package csumissu.car.rental.car.representation.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class CreateCarResponse {
+
+    private Long id;
+
+}
