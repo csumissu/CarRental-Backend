@@ -8,6 +8,7 @@ import csumissu.car.rental.car.representation.dto.SearchCarResponse;
 import csumissu.car.rental.car.representation.mapper.CarCommandMapper;
 import csumissu.car.rental.car.representation.service.CarCommandService;
 import csumissu.car.rental.car.representation.service.CarQueryService;
+import csumissu.car.rental.common.response.UseCustomizedResponse;
 import org.mapstruct.factory.Mappers;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
+@UseCustomizedResponse
 @RequestMapping("/cars")
 public class CarController {
 
