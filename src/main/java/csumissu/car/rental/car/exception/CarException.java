@@ -23,4 +23,12 @@ public class CarException extends AppException {
     public static CarException notFound() {
         return new CarException(404_01_001, "Car not found");
     }
+
+    public static CarException alreadyInUse() {
+        return new CarException(400_01_003, "This car is already in use");
+    }
+
+    public static CarException alreadyAvailable() {
+        return new CarException(400_01_004, "This car is already available");
+    }
 }

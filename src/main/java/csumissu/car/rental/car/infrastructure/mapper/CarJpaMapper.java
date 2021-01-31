@@ -16,6 +16,8 @@ public abstract class CarJpaMapper {
     @Mapping(target = "deleted", ignore = true)
     public abstract CarEntity toCarEntity(Car car);
 
+    public abstract Car toCar(CarEntity carEntity);
+
     protected Integer toDatabaseCarStatus(CarStatus status) {
         return status.getCode();
     }

@@ -1,6 +1,7 @@
 package csumissu.car.rental.car.domain.entity;
 
 import csumissu.car.rental.car.domain.command.CreateCarCommand;
+import csumissu.car.rental.car.exception.CarException;
 import csumissu.car.rental.common.data.BaseDomain;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -37,6 +38,20 @@ public class Car extends BaseDomain {
                 .dailyRentPrice(command.getDailyRentPrice().setScale(BASE_SCALE, BASE_ROUNDING_MODE))
                 .status(CarStatus.AVAILABLE)
                 .build();
+    }
+
+    public void markAsInUse() {
+        if (status == CarStatus.IN_USE) {
+            throw CarException.alreadyInUse();
+        }
+        this.status = CarStatus.IN_USE;
+    }
+
+    public void markAsAvailable() {
+        if (status == CarStatus.AVAILABLE) {
+            throw CarException.alreadyAvailable();
+        }
+        this.status = CarStatus.AVAILABLE;
     }
 
     public void setId(long id) {

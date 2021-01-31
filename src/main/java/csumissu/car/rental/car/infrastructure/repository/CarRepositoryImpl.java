@@ -8,6 +8,8 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Repository
 public class CarRepositoryImpl implements CarRepository {
 
@@ -25,6 +27,12 @@ public class CarRepositoryImpl implements CarRepository {
         var carEntity = jpaMapper.toCarEntity(car);
         jpaRepository.save(carEntity);
         car.setId(carEntity.getId());
+    }
+
+    @Override
+    public Optional<Car> findById(long id) {
+        return jpaRepository.findById(id)
+                .map(jpaMapper::toCar);
     }
 
 }
