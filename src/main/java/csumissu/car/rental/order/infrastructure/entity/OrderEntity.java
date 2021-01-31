@@ -1,5 +1,6 @@
 package csumissu.car.rental.order.infrastructure.entity;
 
+import com.querydsl.core.annotations.QueryEntity;
 import csumissu.car.rental.common.data.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +17,7 @@ import java.time.Instant;
 @Getter
 @Setter
 @Entity
+@QueryEntity
 @Table(name = "[order]")
 @Where(clause = "deleted = false")
 @SQLDelete(sql = "UPDATE order SET deleted = true, version = version + 1, updated_at = current_timestamp " +

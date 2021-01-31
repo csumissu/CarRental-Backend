@@ -1,5 +1,7 @@
 package csumissu.car.rental.order.representation.service;
 
+import com.querydsl.jpa.impl.JPAQuery;
+import csumissu.car.rental.order.exception.OrderException;
 import csumissu.car.rental.order.infrastructure.entity.OrderEntity;
 import csumissu.car.rental.order.infrastructure.repository.jpa.OrderJpaRepository;
 import csumissu.car.rental.order.representation.dto.OrderDetailResponse;
@@ -13,20 +15,38 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import java.util.Optional;
+
+import static csumissu.car.rental.car.infrastructure.entity.QCarEntity.carEntity;
+import static csumissu.car.rental.order.infrastructure.entity.QOrderEntity.orderEntity;
+
 @Service
 public class OrderQueryService {
 
     private final OrderJpaRepository jpaRepository;
     private final OrderQueryMapper queryMapper;
+    private final EntityManager entityManager;
 
-    public OrderQueryService(OrderJpaRepository jpaRepository) {
+    public OrderQueryService(OrderJpaRepository jpaRepository, EntityManager entityManager) {
         this.jpaRepository = jpaRepository;
         this.queryMapper = Mappers.getMapper(OrderQueryMapper.class);
+        this.entityManager = entityManager;
     }
 
     @Transactional(readOnly = true)
     public OrderDetailResponse getOrderById(long id) {
-        return null;
+        var jpaQuery = new JPAQuery<>(entityManager);
+        var result = jpaQuery.select(orderEntity, carEntity)
+                .from(orderEntity)
+                .innerJoin(carEntity)
+                .on(carEntity.id.eq(orderEntity.carId))
+                .where(orderEntity.id.eq(id))
+                .fetchOne();
+
+        return Optional.ofNullable(result)
+                .map(tuple -> queryMapper.toOrderDetailResponse(tuple.get(orderEntity), tuple.get(carEntity)))
+                .orElseThrow(OrderException::notFound);
     }
 
     @Transactional(readOnly = true)
