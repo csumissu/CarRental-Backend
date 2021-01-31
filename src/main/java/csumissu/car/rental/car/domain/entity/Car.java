@@ -5,10 +5,10 @@ import csumissu.car.rental.car.exception.CarException;
 import csumissu.car.rental.common.data.BaseDomain;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 
@@ -16,7 +16,7 @@ import static csumissu.car.rental.common.Constants.BASE_ROUNDING_MODE;
 import static csumissu.car.rental.common.Constants.BASE_SCALE;
 
 @Getter
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)

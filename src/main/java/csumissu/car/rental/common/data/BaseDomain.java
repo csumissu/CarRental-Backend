@@ -13,6 +13,6 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public abstract class BaseDomain {
 
-    private Integer version;
+    protected Integer version;
 
 }
