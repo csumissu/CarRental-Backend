@@ -49,7 +49,7 @@ public abstract class BaseEntity {
 
     @Version
     @Column(name = "version")
-    private Integer version = 0;
+    private Integer version;
 
     @Column(name = "deleted")
     private Boolean deleted = false;
