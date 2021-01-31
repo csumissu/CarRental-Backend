@@ -15,7 +15,7 @@ The customers use this system to rent and return cars, and the system administra
 - Search all available cars ```GET /cars```
 - View the details of a certain car ````GET /cars/{id}````
 - Create an order by booking a car ```POST /orders```
-- Close an order by returning a car ```PUT /orders/{id}```
+- Close an order by returning a car ```POST /orders/{id}/close```
 - Search orders ```GET /orders```
 - View the details of a certain order ```GET /orders/{id}```
 
