@@ -15,6 +15,7 @@ public interface OrderQueryMapper {
     @Mapping(target = "id", source = "orderEntity.id")
     @Mapping(target = "dailyRentPrice", source = "orderEntity.dailyRentPrice")
     @Mapping(target = "car", source = "carEntity")
+    @Mapping(target = "user.id", source = "orderEntity.userId")
     OrderDetailResponse toOrderDetailResponse(OrderEntity orderEntity, CarEntity carEntity);
 
 }
