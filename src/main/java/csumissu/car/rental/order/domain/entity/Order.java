@@ -2,6 +2,7 @@ package csumissu.car.rental.order.domain.entity;
 
 import csumissu.car.rental.common.data.BaseDomain;
 import csumissu.car.rental.order.domain.command.CreateOrderCommand;
+import csumissu.car.rental.order.exception.OrderException;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -54,9 +55,10 @@ public class Order extends BaseDomain {
     }
 
     public void close() {
-        if (returnedAt == null) {
-            returnedAt = Instant.now();
+        if (returnedAt != null) {
+            throw OrderException.alreadyClosed();
         }
+        returnedAt = Instant.now();
     }
 
     public void setId(long id) {

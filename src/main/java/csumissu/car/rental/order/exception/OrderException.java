@@ -1,7 +1,9 @@
 package csumissu.car.rental.order.exception;
 
 import csumissu.car.rental.common.exception.AppException;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper = false)
 public class OrderException extends AppException {
 
     private OrderException(int code, String message) {
@@ -18,6 +20,10 @@ public class OrderException extends AppException {
 
     public static OrderException notFound() {
         return new OrderException(404_02_001, "Order not found");
+    }
+
+    public static OrderException alreadyClosed() {
+        return new OrderException(400_02_002, "Order was already closed");
     }
 
 }

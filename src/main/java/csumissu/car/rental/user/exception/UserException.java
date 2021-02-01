@@ -1,7 +1,9 @@
 package csumissu.car.rental.user.exception;
 
 import csumissu.car.rental.common.exception.AppException;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper = false)
 public class UserException extends AppException {
 
     private UserException(int code, String message) {

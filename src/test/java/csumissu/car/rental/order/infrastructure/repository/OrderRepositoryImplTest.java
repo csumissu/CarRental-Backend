@@ -1,9 +1,8 @@
-package csumissu.car.rental.car.infrastructure.repository;
+package csumissu.car.rental.order.infrastructure.repository;
 
-import csumissu.car.rental.car.domain.entity.Car;
-import csumissu.car.rental.car.domain.entity.CarStatus;
-import csumissu.car.rental.car.infrastructure.entity.CarEntity;
-import csumissu.car.rental.car.infrastructure.repository.jpa.CarJpaRepository;
+import csumissu.car.rental.order.domain.entity.Order;
+import csumissu.car.rental.order.infrastructure.entity.OrderEntity;
+import csumissu.car.rental.order.infrastructure.repository.jpa.OrderJpaRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -19,37 +18,35 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class CarRepositoryImplTest {
+public class OrderRepositoryImplTest {
 
     @Mock
-    private CarJpaRepository jpaRepository;
+    private OrderJpaRepository jpaRepository;
     @InjectMocks
-    private CarRepositoryImpl repository;
+    private OrderRepositoryImpl repository;
 
     @Test
-    public void should_save_car_entity() {
+    public void should_save_order_entity() {
         // given
-        var car = Car.builder()
-                .status(CarStatus.AVAILABLE)
+        var order = Order.builder()
                 .build();
-        var captor = ArgumentCaptor.forClass(CarEntity.class);
+        var captor = ArgumentCaptor.forClass(OrderEntity.class);
 
         // when
-        repository.save(car);
+        repository.save(order);
 
         // then
         verify(jpaRepository).save(captor.capture());
-        assertEquals(captor.getValue().getId(), car.getId());
+        assertEquals(captor.getValue().getId(), order.getId());
     }
 
     @Test
-    public void should_find_one_car_by_id_when_car_exists() {
+    public void should_find_one_order_by_id_when_order_exists() {
         // given
         var id = 1L;
-        var carEntity = new CarEntity();
-        carEntity.setId(id);
-        carEntity.setStatus(CarStatus.AVAILABLE.getCode());
-        when(jpaRepository.findById(id)).thenReturn(Optional.of(carEntity));
+        var orderEntity = new OrderEntity();
+        orderEntity.setId(id);
+        when(jpaRepository.findById(id)).thenReturn(Optional.of(orderEntity));
 
         // when
         var result = repository.findById(id);
@@ -57,11 +54,10 @@ public class CarRepositoryImplTest {
         // then
         assertTrue(result.isPresent());
         assertEquals(id, result.get().getId());
-        assertEquals(CarStatus.AVAILABLE, result.get().getStatus());
     }
 
     @Test
-    public void should_find_nothing_by_id_when_car_not_exists() {
+    public void should_find_nothing_by_id_when_order_not_exists() {
         // given
         var id = 1L;
         when(jpaRepository.findById(id)).thenReturn(Optional.empty());
@@ -72,4 +68,6 @@ public class CarRepositoryImplTest {
         // then
         assertTrue(result.isEmpty());
     }
+
+
 }

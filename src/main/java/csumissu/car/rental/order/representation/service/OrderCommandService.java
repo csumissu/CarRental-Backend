@@ -41,12 +41,13 @@ public class OrderCommandService {
     public void closeOrder(long id) {
         var order = orderRepository.findById(id)
                 .orElseThrow(OrderException::notFound);
+        var car = carRepository.findById(order.getCarId())
+                .orElseThrow(CarException::notFound);
+
         // TODO: check only original user could close his order
         order.close();
         orderRepository.save(order);
 
-        var car = carRepository.findById(order.getCarId())
-                .orElseThrow(CarException::notFound);
         car.markAsAvailable();
         carRepository.save(car);
     }
