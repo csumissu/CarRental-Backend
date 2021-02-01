@@ -19,6 +19,7 @@ configurations {
 }
 
 repositories {
+    maven { url 'http://mirrors.cloud.tencent.com/nexus/repository/maven-public/' }
     maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
 }
 
