@@ -15,9 +15,9 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @Entity
-@Table(name = "car")
+@Table(name = "t_car")
 @Where(clause = "deleted = false")
-@SQLDelete(sql = "UPDATE car SET deleted = true, version = version + 1, updated_at = current_timestamp " +
+@SQLDelete(sql = "UPDATE t_car SET deleted = true, version = version + 1, updated_at = current_timestamp " +
         "WHERE id = ? AND version = ?", check = ResultCheckStyle.COUNT)
 public class CarEntity extends BaseEntity {
 

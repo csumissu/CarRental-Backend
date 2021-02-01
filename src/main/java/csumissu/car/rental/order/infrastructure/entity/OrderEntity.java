@@ -18,9 +18,9 @@ import java.time.Instant;
 @Setter
 @Entity
 @QueryEntity
-@Table(name = "[order]")
+@Table(name = "t_order")
 @Where(clause = "deleted = false")
-@SQLDelete(sql = "UPDATE order SET deleted = true, version = version + 1, updated_at = current_timestamp " +
+@SQLDelete(sql = "UPDATE t_order SET deleted = true, version = version + 1, updated_at = current_timestamp " +
         "WHERE id = ? AND version = ?", check = ResultCheckStyle.COUNT)
 public class OrderEntity extends BaseEntity {
 

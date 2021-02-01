@@ -49,8 +49,6 @@ public class OrderDetailResponse {
 
         private Long id;
 
-        private String nickName;
-
     }
 
 }
