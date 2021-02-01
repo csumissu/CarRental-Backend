@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.4.2'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'com.avast.gradle.docker-compose' version '0.14.0' apply false
+    id 'org.springframework.cloud.contract' version '2.2.5.RELEASE'
     id 'net.ltgt.apt' version '0.20'
     id 'java'
     id 'groovy'
@@ -46,10 +47,19 @@ dependencies {
     testImplementation 'org.mockito:mockito-inline'
     testImplementation 'org.spockframework:spock-core:1.3-groovy-2.5'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'com.h2database:h2'
+    testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-verifier:2.2.5.RELEASE'
+    testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-stub-runner:2.2.5.RELEASE'
 }
 
 test {
     useJUnitPlatform()
+}
+
+contracts {
+    testFramework = "JUNIT5"
+    failOnNoContracts = false
+    baseClassForTests = "csumissu.car.rental.contract.BaseContractTest"
 }
 
 apply from: "${rootProject.projectDir}/gradle/docker-compose/docker.gradle"
